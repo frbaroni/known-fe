@@ -1,0 +1,122 @@
+﻿Projeto:
+	The Estabelecimentos
+
+Tecnologias:
+	Frontend: Angular
+	Backend: NodeJS + Express
+
+"E-Commerce de estabelecimentos":
+	Principal: bordeis/prostitutas/drogas
+	Alternativo: floriculturas/floricultores/plantas -> mudar para hamburguer
+
+Sistemas:
+	Login
+	Financeiro:
+		O usuario tera dinheiro
+		Havera um botao que adiciona dinheiro (emulando um payment gateway)
+		A cada 30 minutos, ganha um dinheirinho, para os pobre (nois) mortal
+			usar umas timestamp e calcular diferenca de tempo, ai calcula na hora que for atualizar, mais performatico
+	Estabelecimentos
+		Comprar um estabelecimento
+			Lista de estabelecimentos disponiveis
+			Botao de comprar e atribuir estabelecimento ao dono
+		Funcionarios
+			Contratar
+			Demitir
+			Pode	 morrer aleatoriamente por uso de drogas/fertilizantes
+		Produtos
+			Comprar stock
+			Vendas aleatorias durante o tempo
+
+
+
+Entidades:
+	Usuario {
+		ID
+		Nome
+		Dinheiro
+		Estabelecimentos[]
+	}
+
+	Estabelecimento {
+		Classe: [A (Fazendinha); B (Imperio); C (Michele)]
+		Funcionarios[]:			[Floricultores/Prostitutas/Seguranca]
+		Produtos[]:			[Cerveja/Drogas/Fertilizante/Sementes]
+	}
+
+	Funcionario {		
+		Classe
+		Honorarios
+	}
+
+
+Colinhas
+	1. Instalar:		npm install --global @angular/cli   					-> CLI: command line interface
+	2. Criar projeto:	ng new {app-name}
+	3. Iniciar:			ng serve --port 420 --open
+			--open -> abrir o navegador
+			--port -> mudar a porta padrão
+	4. ng for
+	    <li *ngFor="let ITEM of LISTA">
+			{{ item }}
+		</li>
+
+
+	App. decorators:
+			/*
+			Decorator Angular === HOC - High Order Component === Decorator Java === Decorator do .NET
+			1. Maneira de passar um componente dinamicamente
+			2. Maneira de 'alterar' um behavior servico/componente
+			*/
+			pessoa { 
+				name: douglas
+				surname: ribeiro
+			}
+
+			fullName() -> `${pessoal.name} + ${pessoa.surName}`
+			-> 'douglas ribeiro'
+
+			@Greeting
+			fullName() -> 'Olá douglas ribeiro'
+
+
+			Greeting [ 
+			valorOriginal = fullName()
+			transformação: => "Olá " + valorOriginal
+			]
+
+
+	
+	
+
+	// dica do Tosta: existe um numero 'bla' entre 5 e 7
+
+
+
+function greeting(target, key, descriptor) {
+const originalMethod = descriptor.value;
+
+descriptor.value = function() {
+return `Hello, ${originalMethod.apply(this, arguments)}`;
+}
+
+return descriptor;
+};
+
+/* ------ */
+
+class Bacon {
+private name: string;
+
+constructor(name: string) {
+this.name = name;
+}
+
+@greeting
+WHAZUP() {
+return `My name is ${this.name}, and I ♥ BACOOOOOOOOOOOOOOOOON!`;
+}
+}
+
+const yo = new Bacon('Tosta');
+console.log(yo.WHAZUP()); 
