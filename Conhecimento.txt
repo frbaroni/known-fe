@@ -60,36 +60,73 @@ Colinhas
 	    <li *ngFor="let ITEM of LISTA">
 			{{ item }}
 		</li>
+	5. Decorators (to be continued)
+	6. Array.filter() e Array.map()
+	7. Boas Praticas sobre Estados de Aplicações
+		1. É proibido dados armazenados em mais de um lugar:
+			- 'bad code smell':
+				quando você tem uma logica que atualiza um objeto, e precisa replicar essa
+				logica para atualizar o mesmo objeto em outro lugar: a informação está duplicada
+			- a informação deve ser armazenada em apenas um unico lugar 'single source of truth'
+		2. Dados Processados não devem ser armazenados,
+			apenas calculados em tempo de renderização
+			const servicos_contratados = [
+				{ nome: 'Sherley', nota: 8 },
+				{ nome: 'Stefani', nota: 4 },
+				{ nome: 'Ashlei', nota: 9 }, // tinha peitão
+				{ nome: 'Natalia', nota: 5 },
+				{ nome: 'Natalia', nota: 9 },
+			];
 
-
-	App. decorators:
-			/*
-			Decorator Angular === HOC - High Order Component === Decorator Java === Decorator do .NET
-			1. Maneira de passar um componente dinamicamente
-			2. Maneira de 'alterar' um behavior servico/componente
-			*/
-			pessoa { 
-				name: douglas
-				surname: ribeiro
+			let total_nota_acumulado = {};
+			for ( servico of servicos_contratados ) {
+				if (!total_nota_acumulado[servico.nome]) total_nota_acumulado[servico.nome] = 0;
+				total_nota_acumulado[servico.nome] += servico.nota
 			}
+			// Essa informação é dinamica e calculada em cima dos dados estaticos do objeto
+			// Não precisamos dessa informação armazenada no estado da aplicação,
+			// podemos calcular apenas quando necessario.
+			// Quando houver problemas de performance: memoização/programação dinamica ;)
 
-			fullName() -> `${pessoal.name} + ${pessoa.surName}`
-			-> 'douglas ribeiro'
+	8. Gerar componente:  ng generate component ListaEstabelecimentos
+	9. Gerar servico:     ng generate service Usuario
 
-			@Greeting
-			fullName() -> 'Olá douglas ribeiro'
-
-
-			Greeting [ 
-			valorOriginal = fullName()
-			transformação: => "Olá " + valorOriginal
-			]
+	Plano:
+	1. succeed - Terminar listagem de bordeis com seus respectivos preços
+	2. started - Preparar 'state' com o dinheiro do usuario
+	3. Logica para adicionar dinheiro ao usuario com o tempo
 
 
-	
-	
 
-	// dica do Tosta: existe um numero 'bla' entre 5 e 7
+
+App. decorators:
+		/*
+		Decorator Angular === HOC - High Order Component === Decorator Java === Decorator do .NET
+		1. Maneira de passar um componente dinamicamente
+		2. Maneira de 'alterar' um behavior servico/componente
+		*/
+		pessoa { 
+			name: douglas
+			surname: ribeiro
+		}
+
+		fullName() -> `${pessoal.name} + ${pessoa.surName}`
+		-> 'douglas ribeiro'
+
+		@Greeting
+		fullName() -> 'Olá douglas ribeiro'
+
+
+		Greeting [ 
+		valorOriginal = fullName()
+		transformação: => "Olá " + valorOriginal
+		]
+
+
+
+
+
+// dica do Tosta: existe um numero 'bla' entre 5 e 7
 
 
 
