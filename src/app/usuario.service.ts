@@ -41,5 +41,4 @@ export class UsuarioService {
   public getMoney() {
     return this.money;
   }
-
 }
