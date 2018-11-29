@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UsuarioService } from '../usuario.service';
 
 @Component({
   selector: 'app-listagem-estabelecimentos',
@@ -11,11 +12,18 @@ export class ListagemEstabelecimentosComponent implements OnInit {
     { nome: 'Fazendinha', classe: 'A+', preco: 12345 },
     { nome: 'Michele (Itapetininga)', classe: 'B', preco: 6911 },
   ];
+  private totalMoney: Number = 0.0;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(userService: UsuarioService) {
+    userService.calculate();
+    this.totalMoney =  userService.getMoney();
     
+    setInterval(() => {
+      userService.calculate();
+      this.totalMoney = userService.getMoney();
+    }, 5000);
   }
+
+  ngOnInit() {}
 
 }

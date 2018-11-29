@@ -1,8 +1,12 @@
 <ul>
   <li
-    *ngFor="let estabelecimento_putaria
+    *ngFor="let est
             of estabelecimentos">
-    {{ estabelecimento_putaria.nome }}
-    {{ estabelecimento_putaria.preco  }}
+    {{ est.nome }}
+    {{ est.preco  }}
   </li>
 </ul>
+
+<div>
+  Money: {{ totalMoney }}
+</div>
